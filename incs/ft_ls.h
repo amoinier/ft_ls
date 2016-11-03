@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/03 15:13:05 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/03 19:46:47 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,8 @@
 # include <pwd.h>
 # include <uuid/uuid.h>
 # include <time.h>
+
+void	ft_list_dir(char *filename);
+void	ft_info_file(char *filename);
 
 #endif
