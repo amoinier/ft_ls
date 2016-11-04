@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/03 19:46:47 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/04 13:58:04 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@
 # include <pwd.h>
 # include <uuid/uuid.h>
 # include <time.h>
+
+typedef struct	s_file
+{
+	char			*name;
+	char			*right;
+	int				nblk;
+	char			*prop;
+	char			*groupe;
+	int				size;
+	unsigned int	date;
+}
 
 void	ft_list_dir(char *filename);
 void	ft_info_file(char *filename);
