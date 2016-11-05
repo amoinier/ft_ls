@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/05 13:07:53 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/05 13:49:25 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/xattr.h>
 # include <sys/types.h>
 # include <pwd.h>
+# include <grp.h>
 # include <uuid/uuid.h>
 # include <time.h>
 
