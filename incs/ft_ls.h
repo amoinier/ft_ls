@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/05 13:49:25 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/05 18:37:10 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,13 @@ typedef struct	s_file
 	char			*prop;
 	char			*groupe;
 	int				size;
-	unsigned int	date;
+	char			*date;
+	struct s_file	*next;
 }				t_file;
 
-void	ft_list_dir(char *filename);
+char	**ft_list_dir(char *filename);
 void	ft_info_file(char *filename);
+void	ft_freedtab2(char **tab, int size);
+char	**sort_name(char **list);
 
 #endif

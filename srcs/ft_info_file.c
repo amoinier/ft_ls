@@ -6,13 +6,14 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/05 14:00:21 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/05 14:39:58 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static	char	ft_let_type(mode_t st_mode) {
+static	char	ft_let_type(mode_t st_mode)
+{
 	if (S_ISSOCK(st_mode))
 		return ('s');
 	else if (S_ISFIFO(st_mode))
@@ -31,7 +32,8 @@ static	char	ft_let_type(mode_t st_mode) {
 		return ('-');
 }
 
-char	*ft_get_right(struct stat info) {
+char	*ft_get_right(struct stat info)
+{
 	char	*right;
 
 	if (!(right = (char *)malloc(sizeof(right) * (10 + 1))))

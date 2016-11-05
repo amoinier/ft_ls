@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freedtab.c                                      :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/03 15:36:05 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/05 15:00:35 by amoinier         ###   ########.fr       */
+/*   Created: 2016/11/05 17:37:40 by amoinier          #+#    #+#             */
+/*   Updated: 2016/11/05 17:38:04 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_ls.h"
 
-void	ft_freedtab(char **tab)
+void	ft_freedtab2(char **tab, int size)
 {
 	int	i;
 
-	i = ft_strlen(tab[0]);
+	i = size;
 	if (tab == NULL)
 	{
 		free(tab);
