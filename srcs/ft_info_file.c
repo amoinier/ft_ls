@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/04 13:48:07 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/05 13:06:41 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	ft_info_file(char *filename)
 	printf("%d\n", info.st_rdev);
 	printf("%d\n", info.st_blksize);
 	printf("%lld\n", info.st_blocks);
-	printf("%ld\n", info.st_atime);
-	printf("%ld\n", info.st_mtime);
-	printf("%ld\n", info.st_ctime);
+	printf("%s\n", ctime(&info.st_atime));
+	printf("%s\n", ctime(&info.st_mtime));
+	printf("%s\n", ctime(&info.st_ctime));
 	printf((info.st_mode & S_IRUSR) ? "r" : "-");
 	printf("DIR : %d\n", S_ISDIR(info.st_mode));
 	printf("REG : %d\n", S_ISREG(info.st_mode));
