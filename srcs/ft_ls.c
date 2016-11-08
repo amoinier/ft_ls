@@ -6,13 +6,38 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/08 16:47:21 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/08 17:36:26 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	write_filename(char *path, char *start, t_file *list)
+void	write_info(char *flag, t_file *list)
+{
+	if (ft_strchr(flag, 'l'))
+	{
+		ft_putstr(list->right);
+		ft_putchar(' ');
+		ft_putnbr(list->nblk);
+		ft_putchar(' ');
+		ft_putstr(list->prop);
+		ft_putchar(' ');
+		ft_putstr(list->groupe);
+		ft_putchar(' ');
+		ft_putnbr(list->size);
+		ft_putchar(' ');
+		ft_putnbr(list->date);
+		ft_putchar(' ');
+		ft_putstr(list->name);
+		ft_putchar('\n');
+	}
+	else {
+		ft_putstr(list->name);
+		ft_putchar('\n');
+	}
+}
+
+void	write_filename(char *flag, char *path, char *start, t_file *list)
 {
 	if (path != start)
 	{
@@ -22,8 +47,7 @@ void	write_filename(char *path, char *start, t_file *list)
 	}
 	while (list->next)
 	{
-		ft_putstr(list->name);
-		ft_putchar('\n');
+		write_info(flag, list);
 		list = list->next;
 	}
 	ft_putchar('\n');
@@ -43,7 +67,7 @@ void	ft_list_all_dir(char *flag, char *path, char *start)
 		if (list)
 		{
 			tmp = list;
-			write_filename(path, start, tmp);
+			write_filename(flag, path, start, tmp);
 			if (ft_strchr(flag, 'R'))
 			{
 				while (tmp->next)

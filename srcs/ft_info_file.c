@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/05 14:39:58 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/08 17:44:29 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,32 +52,22 @@ char	*ft_get_right(struct stat info)
 	return (right);
 }
 
-void			ft_info_file(char *filename)
+t_file			*ft_info_file(t_file *list, char *filename)
 {
 	struct	stat	info;
+	char	*fpath;
+	char	*newpath;
 
-	stat(filename, &info);
-	ft_get_right(info);
-	// printf("%llu\n", info.st_ino);
-	// printf("%hu\n", info.st_mode);
-	ft_putstr(ft_get_right(info));
-	printf(" %hu", info.st_nlink);
-	printf(" %s", getpwuid(info.st_uid)->pw_name);
-	printf(" %s", getgrgid(info.st_gid)->gr_name);
-	// printf("%d\n", info.st_rdev);
-	printf(" %lld", info.st_size);
-	// printf("%d\n", info.st_blksize);
-	// printf("%lld\n", info.st_blocks);
-	// printf("%s\n", ctime(&info.st_atime));
-	printf(" %s %s", ctime(&info.st_mtime), filename);
-	// printf("%s\n", ctime(&info.st_ctime));
-	// printf((info.st_mode & S_IRUSR) ? "r" : "-");
-	// printf("DIR : %d\n", S_ISDIR(info.st_mode));
-	// printf("REG : %d\n", S_ISREG(info.st_mode));
-	// printf("LINK : %d\n", S_ISLNK(info.st_mode));
-	// printf("CHARMOD : %d\n", S_ISCHR(info.st_mode));
-	// printf("BLOCK : %d\n", S_ISBLK(info.st_mode));
-	// printf("FIFO : %d\n", S_ISFIFO(info.st_mode));
-	// printf("SOCKET : %d\n", S_ISSOCK(info.st_mode));
-	return ;
+	fpath = ft_strjoin(filename, "/");
+	newpath = ft_strjoin(fpath, list->name);
+	stat(newpath, &info);
+	ft_strdel(&fpath);
+	ft_strdel(&newpath);
+	list->right = ft_get_right(info);
+	list->nblk = info.st_nlink;
+	list->prop = getpwuid(info.st_uid)->pw_name;
+	list->groupe = getgrgid(info.st_gid)->gr_name;
+	list->size = (unsigned int)info.st_size;
+	list->date = (unsigned int)info.st_mtime;
+	return (list);
 }
