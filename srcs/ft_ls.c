@@ -6,54 +6,105 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/05 18:29:14 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/08 16:47:21 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_list_all_dir(char *path) {
-	int		i;
-	char	**list;
+void	write_filename(char *path, char *start, t_file *list)
+{
+	if (path != start)
+	{
+		ft_putstr(path);
+		ft_putchar(':');
+		ft_putchar('\n');
+	}
+	while (list->next)
+	{
+		ft_putstr(list->name);
+		ft_putchar('\n');
+		list = list->next;
+	}
+	ft_putchar('\n');
+	return ;
+}
+
+void	ft_list_all_dir(char *flag, char *path, char *start)
+{
+	t_file	*list;
+	t_file	*tmp;
 	char	*fpath;
 	char	*newpath;
 
-	i = 0;
 	if (path)
 	{
-		list = ft_list_dir(path);
-		if (list) {
-			while (list[i])
+		list = ft_list_dir(flag, path);
+		if (list)
+		{
+			tmp = list;
+			write_filename(path, start, tmp);
+			if (ft_strchr(flag, 'R'))
 			{
-				ft_putstr(list[i]);
-				ft_putchar(' ');
-				i++;
+				while (tmp->next)
+				{
+					if (ft_strcmp(tmp->name, ".") && ft_strcmp(tmp->name, ".."))
+					{
+						fpath = ft_strjoin(path, "/");
+						newpath = ft_strjoin(fpath, tmp->name);
+						ft_list_all_dir(flag, newpath, start);
+						ft_strdel(&fpath);
+						ft_strdel(&newpath);
+					}
+					tmp = tmp->next;
+				}
 			}
-			i = 0;
-			while (list[i])
-			{
-				fpath = ft_strjoin(path, "/");
-				newpath = ft_strjoin(fpath, list[i]);
-				ft_list_all_dir(newpath);
-				ft_strdel(&fpath);
-				ft_strdel(&newpath);
-				i++;
-			}
-			ft_freedtab2(list, i);
-			ft_putchar('\n');
 		}
 	}
 	return ;
 }
 
-int	main(int ac, char **av) {
-	ac = 1;
-	char	*path;
+char		*check_flag(int ac, char **av)
+{
+	int	i;
+	int	j;
+	int	k;
+	char	*flag;
 
-	if (!av[1])
+	flag = ft_strnew(6);
+	i = 1;
+	k = 0;
+	while (i < ac)
+	{
+		j = 0;
+		while (av[i][j])
+		{
+			if (av[i][0] == '-')
+			{
+				if (av[i][j] == 'R' || av[i][j] == 'l' || av[i][j] == 'a' ||
+				av[i][j] == 'r' || av[i][j] == 't')
+				{
+					flag[k] = av[i][j];
+					k++;
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+	return (flag);
+}
+
+int	main(int ac, char **av)
+{
+	char	*path;
+	char	*flag;
+
+	flag = check_flag(ac, av);
+	if (ac <= 1 || !av[ac])
 		path = ".";
 	else
-		path = av[1];
-	ft_list_all_dir(path);
+		path = av[ac - 1];
+	ft_list_all_dir(flag, path, path);
 	return (0);
 }

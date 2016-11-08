@@ -6,70 +6,24 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:40:55 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/05 18:34:36 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/08 15:46:52 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-char	**sort_name(char **list)
+t_file *ft_sort_file(t_file *start, t_file *new)
 {
-	int		i;
-	int		j;
-	int		k;
-	char	*tmp;
+	t_file	*tmp;
 
-	i = 0;
-	while (list[i])
-	{
-		j = i + 1;
-		tmp = ft_strdup(list[i]);
-		while (list[j])
-		{
-			if (strcmp(tmp, list[j]) >= 0)
-			{
-				tmp = ft_strdup(list[j]);
-				k = j;
-			}
-			j++;
-		}
-		if(tmp != list[i])
-		{
-			list[k] = ft_strdup(list[i]);
-			list[i] = ft_strdup(tmp);
-		}
-		i++;
-	}
-	return (list);
-}
-
-void	sort_int_tab(int *tab, unsigned int size)
-{
-	unsigned	int	i;
-	unsigned	int	j;
-	int				k;
-	int	tmp;
-
-	i = 0;
-	k = 0;
-	while (i < size)
-	{
-		j = i + 1;
-		tmp = tab[i];
-		while (j < size)
-		{
-			if (tmp >= tab[j])
-			{
-				tmp = tab[j];
-				k = j;
-			}
-			j++;
-		}
-		if (tmp != tab[i])
-		{
-			tab[k] = tab[i];
-			tab[i] = tmp;
-		}
-		i++;
-	}
+	tmp = start;
+	while (tmp && tmp->name && ft_strcmp(tmp->name, new->name) < 0)
+		tmp = tmp->next;
+	new->next = tmp;
+	if (tmp->prev)
+		tmp->prev->next = new;
+	tmp->prev = new;
+	while (start->prev)
+		start = start->prev;
+	return (start);
 }
