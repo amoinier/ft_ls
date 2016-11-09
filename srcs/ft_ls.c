@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/08 17:36:26 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/08 23:44:56 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int	main(int ac, char **av)
 	char	*flag;
 
 	flag = check_flag(ac, av);
-	if (ac <= 1 || !av[ac])
+	if (ac <= 1 || av[ac - 1][0] == '-')
 		path = ".";
 	else
 		path = av[ac - 1];

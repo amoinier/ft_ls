@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:11:11 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/08 17:45:39 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/08 23:35:30 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static	t_file		*ft_create_struct() {
 		return (NULL);
 	list->prev = NULL;
 	list->name = NULL;
+	list->date = 0;
 	list->next = NULL;
 	return (list);
 }
