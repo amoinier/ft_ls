@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/08 17:44:29 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/10 12:14:38 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_file			*ft_info_file(t_file *list, char *filename)
 	stat(newpath, &info);
 	ft_strdel(&fpath);
 	ft_strdel(&newpath);
+	list->nb_block = info.st_blocks;
 	list->right = ft_get_right(info);
 	list->nblk = info.st_nlink;
 	list->prop = getpwuid(info.st_uid)->pw_name;

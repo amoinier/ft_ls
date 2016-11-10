@@ -6,7 +6,7 @@
 #    By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 12:02:38 by amoinier          #+#    #+#              #
-#    Updated: 2016/11/04 13:18:36 by amoinier         ###   ########.fr        #
+#    Updated: 2016/11/10 12:56:13 by amoinier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ STD =		\033[39m
 
 NAME =		ft_ls
 
-IDIR =		./incs/
+IDIR =		./includes/
 
 SDIR =		./srcs/
 SRCS =		$(shell ls srcs/)
@@ -35,7 +35,7 @@ all: $(NAME)
 $(NAME): header $(OBCC)
 	@echo "  ${BLU}+ Compilation program:${STD} $@"
 	@make -C ./libft/
-	@gcc $(FLAG) $(OBCC) ./libft/libft.a -I./incs/ -o $(NAME)
+	@gcc $(FLAG) $(OBCC) ./libft/libft.a -I$(IDIR) -o $(NAME)
 
 $(ODIR)%.o: $(SDIR)%.c
 	@echo "  ${GRE}+ Compilation:${STD} $^"
@@ -51,6 +51,7 @@ header:
 
 clean: header
 	@echo "  ${RED}- Remove objects${STD}"
+	@make -C ./libft/ clean
 	@rm -rf $(OBCC)
 
 fclean: clean
