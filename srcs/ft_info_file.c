@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/10 12:14:38 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/10 17:25:49 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ t_file			*ft_info_file(t_file *list, char *filename)
 	list->prop = getpwuid(info.st_uid)->pw_name;
 	list->groupe = getgrgid(info.st_gid)->gr_name;
 	list->size = (unsigned int)info.st_size;
-	list->date = (unsigned int)info.st_mtime;
+	list->date = info.st_mtime;
 	return (list);
 }

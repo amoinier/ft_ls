@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/10 15:01:04 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/10 19:22:12 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,29 @@ static	void	space_nbr(int val, int max)
 	}
 }
 
+static	void	change_date(char *date)
+{
+	ft_putstr(ft_strsub(date, 0, ft_strlen(date) - 9));
+}
+
 static	void	write_info(char *flag, t_file *list)
 {
+	t_nbr		**nbr;
+
+	nbr = count_total();
 	if (ft_strchr(flag, 'l'))
 	{
 		ft_putstr(list->right);
-		space_nbr(list->nblk, 5);
+		space_nbr(list->nblk, nbr[0]->nb_for_sp);
 		ft_putnbr(list->nblk);
 		ft_putchar(' ');
 		ft_putstr(list->prop);
 		ft_putstr("  ");
 		ft_putstr(list->groupe);
-		space_nbr(list->size, 7);
+		space_nbr(list->size, nbr[0]->sz_for_sp);
 		ft_putnbr(list->size);
 		ft_putchar(' ');
-		ft_putnbr(list->date);
+		change_date(ctime(&list->date));
 		ft_putchar(' ');
 		ft_putstr(list->name);
 		ft_putchar('\n');

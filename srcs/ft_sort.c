@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:40:55 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/08 23:34:41 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/10 19:43:11 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,15 @@ t_file *ft_normal_sort(t_file *start, t_file *new)
 	tmp = start;
 	while (tmp && tmp->name && ft_strcmp(tmp->name, new->name) < 0)
 		tmp = tmp->next;
+	if (tmp && tmp->prev)
+		new->prev = tmp->prev;
 	new->next = tmp;
-	if (tmp->prev)
-		tmp->prev->next = new;
-	tmp->prev = new;
+	if (tmp)
+	{
+		if (tmp->prev)
+			tmp->prev->next = new;
+		tmp->prev = new;
+	}
 	while (start->prev)
 		start = start->prev;
 	return (start);
@@ -35,10 +40,15 @@ t_file *ft_inverte_sort(t_file *start, t_file *new)
 	tmp = start;
 	while (tmp && tmp->name && ft_strcmp(tmp->name, new->name) >= 0)
 		tmp = tmp->next;
+	if (tmp && tmp->prev)
+		new->prev = tmp->prev;
 	new->next = tmp;
-	if (tmp->prev)
-		tmp->prev->next = new;
-	tmp->prev = new;
+	if (tmp)
+	{
+		if (tmp->prev)
+			tmp->prev->next = new;
+		tmp->prev = new;
+	}
 	while (start->prev)
 		start = start->prev;
 	return (start);
@@ -49,12 +59,17 @@ t_file *ft_normal_t_sort(t_file *start, t_file *new)
 	t_file	*tmp;
 
 	tmp = start;
-	while (tmp && tmp->date != 0 && (int)(tmp->date - new->date) >= 0)
+	while (tmp && tmp->name && (int)(tmp->date - new->date) >= 0)
 		tmp = tmp->next;
+	if (tmp && tmp->prev)
+		new->prev = tmp->prev;
 	new->next = tmp;
-	if (tmp->prev)
-		tmp->prev->next = new;
-	tmp->prev = new;
+	if (tmp)
+	{
+		if (tmp->prev)
+			tmp->prev->next = new;
+		tmp->prev = new;
+	}
 	while (start->prev)
 		start = start->prev;
 	return (start);
@@ -65,12 +80,17 @@ t_file *ft_inverte_t_sort(t_file *start, t_file *new)
 	t_file	*tmp;
 
 	tmp = start;
-	while (tmp && tmp->date != 0 && (int)(tmp->date - new->date) < 0)
+	while (tmp && tmp->name && (int)(tmp->date - new->date) < 0)
 		tmp = tmp->next;
+	if (tmp && tmp->prev)
+		new->prev = tmp->prev;
 	new->next = tmp;
-	if (tmp->prev)
-		tmp->prev->next = new;
-	tmp->prev = new;
+	if (tmp)
+	{
+		if (tmp->prev)
+			tmp->prev->next = new;
+		tmp->prev = new;
+	}
 	while (start->prev)
 		start = start->prev;
 	return (start);
