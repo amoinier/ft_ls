@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/10 19:22:12 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/10 21:27:35 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,14 @@ static	void	space_nbr(int val, int max)
 
 static	void	change_date(char *date)
 {
-	ft_putstr(ft_strsub(date, 0, ft_strlen(date) - 9));
+	char	*month;
+	char	*day;
+
+	month = to_lower(ft_strsub(date, 4, 4));
+	day = ft_strsub(date, 8, 3);
+	ft_putstr(day);
+	ft_putstr(month);
+	ft_putstr(ft_strsub(date, 11, ft_strlen(date) - 20));
 }
 
 static	void	write_info(char *flag, t_file *list)

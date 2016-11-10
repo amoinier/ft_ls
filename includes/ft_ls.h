@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/10 17:25:54 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/10 21:25:26 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ t_file 	*ft_sort_file(char *flag, t_file *start, t_file *new);
 void	write_filename(char *flag, char *path, char *start, t_file *list);
 
 t_nbr	**count_total();
+char	*to_lower(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/10 17:25:49 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/10 21:28:21 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	*ft_get_right(struct stat info)
 	right[7] = ((info.st_mode & S_IROTH) ? 'r' : '-');
 	right[8] = ((info.st_mode & S_IWOTH) ? 'w' : '-');
 	right[9] = ((info.st_mode & S_IXOTH) ? 'x' : '-');
+	right[10] = '\0';
 	return (right);
 }
 
