@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:11:11 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/10 19:24:02 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 13:03:06 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static	t_file		*ft_create_struct()
 		return (NULL);
 	list->prev = NULL;
 	list->name = NULL;
+	list->realname = NULL;
 	list->date = 0;
 	list->next = NULL;
 	return (list);
@@ -38,7 +39,7 @@ static	int			nb_for_space(int val)
 	return (i + 2);
 }
 
-t_file	*ft_get_file(char *flag, struct dirent *dir, t_file *list, char *filename)
+t_file				*ft_get_file(char *flag, struct dirent *dir, t_file *list, char *filename)
 {
 	t_file	*tmp;
 	t_nbr	**nbr;
@@ -79,7 +80,7 @@ t_file	*ft_get_file(char *flag, struct dirent *dir, t_file *list, char *filename
 	return (list);
 }
 
-t_file				*ft_list_dir(char *flag, char *filename)
+t_file			*ft_list_dir(char *flag, char *filename)
 {
 	struct	dirent *dir;
 	DIR		*id_dir;

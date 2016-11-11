@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/10 21:25:26 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 13:04:33 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@
 # include <uuid/uuid.h>
 # include <time.h>
 
-typedef struct	s_file
+typedef struct		s_file
 {
 	char			*name;
+	char			*realname;
 	char			*right;
 	int				nblk;
 	char			*prop;
@@ -38,24 +39,23 @@ typedef struct	s_file
 	time_t			date;
 	struct s_file	*next;
 	struct s_file	*prev;
-}				t_file;
+}					t_file;
 
-typedef struct	s_nbr
+typedef struct		s_nbr
 {
-		unsigned int	total;
-		unsigned int	file;
-		int				nb_for_sp;
-		int				sz_for_sp;
-}				t_nbr;
+	unsigned int	total;
+	unsigned int	file;
+	int				nb_for_sp;
+	int				sz_for_sp;
+}					t_nbr;
 
-t_file	*ft_list_dir(char *flag, char *filename);
-t_file	*ft_info_file(t_file *list, char *filename);
-void	ft_freedtab2(char **tab, int size);
-t_file 	*ft_sort_file(char *flag, t_file *start, t_file *new);
-
-void	write_filename(char *flag, char *path, char *start, t_file *list);
-
-t_nbr	**count_total();
-char	*to_lower(char *str);
+t_file				*ft_list_dir(char *flag, char *filename);
+t_file				*ft_info_file(t_file *list, char *filename);
+void				ft_freedtab2(char **tab, int size);
+t_file				*ft_sort_file(char *flag, t_file *start, t_file *new);
+void				write_f(char *flag, char *path, char *start, t_file *list);
+t_nbr				**count_total();
+char				*to_lower(char *str);
+void				ft_list_all_dir(char *flag, char *path, char *start);
 
 #endif

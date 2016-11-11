@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/10 21:50:08 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 12:32:30 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ static	char	ft_let_type(mode_t st_mode)
 		return ('-');
 }
 
-char	*ft_get_right(struct stat info)
+char			*ft_get_right(struct stat info)
 {
 	char	*right;
 
 	if (!(right = (char *)malloc(sizeof(right) * (10 + 1))))
 		return (NULL);
-
 	right[0] = ft_let_type(info.st_mode);
 	right[1] = ((info.st_mode & S_IRUSR) ? 'r' : '-');
 	right[2] = ((info.st_mode & S_IWUSR) ? 'w' : '-');
@@ -53,15 +52,28 @@ char	*ft_get_right(struct stat info)
 	return (right);
 }
 
+t_file			*ft_real_name(struct stat info, char *newpath, t_file *list)
+{
+	char	buf[1024];
+
+	if (S_ISLNK(info.st_mode))
+	{
+		readlink(newpath, buf, 1024);
+		list->realname = ft_strdup(buf);
+	}
+	return (list);
+}
+
 t_file			*ft_info_file(t_file *list, char *filename)
 {
-	struct	stat	info;
-	char	*fpath;
-	char	*newpath;
+	struct stat	info;
+	char		*fpath;
+	char		*newpath;
 
 	fpath = ft_strjoin(filename, "/");
 	newpath = ft_strjoin(fpath, list->name);
-	stat(newpath, &info);
+	lstat(newpath, &info);
+	list = ft_real_name(info, newpath, list);
 	ft_strdel(&fpath);
 	ft_strdel(&newpath);
 	list->nb_block = info.st_blocks;

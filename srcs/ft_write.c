@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/10 21:27:35 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 12:37:25 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static	void	space_nbr(int val, int max)
 	int	i;
 
 	i = 0;
+	if (val == 0)
+		i++;
 	while (val != 0)
 	{
 		val = val / 10;
@@ -27,18 +29,6 @@ static	void	space_nbr(int val, int max)
 		ft_putchar(' ');
 		i++;
 	}
-}
-
-static	void	change_date(char *date)
-{
-	char	*month;
-	char	*day;
-
-	month = to_lower(ft_strsub(date, 4, 4));
-	day = ft_strsub(date, 8, 3);
-	ft_putstr(day);
-	ft_putstr(month);
-	ft_putstr(ft_strsub(date, 11, ft_strlen(date) - 20));
 }
 
 static	void	write_info(char *flag, t_file *list)
@@ -58,9 +48,14 @@ static	void	write_info(char *flag, t_file *list)
 		space_nbr(list->size, nbr[0]->sz_for_sp);
 		ft_putnbr(list->size);
 		ft_putchar(' ');
-		change_date(ctime(&list->date));
+		ft_putstr(ft_strsub(ctime(&list->date), 4, ft_strlen(ctime(&list->date)) - 13));
 		ft_putchar(' ');
 		ft_putstr(list->name);
+		if (list->right[0] == 'l' && list->realname)
+		{
+			ft_putstr(" -> ");
+			ft_putstr(list->realname);
+		}
 		ft_putchar('\n');
 	}
 	else {
@@ -69,7 +64,7 @@ static	void	write_info(char *flag, t_file *list)
 	}
 }
 
-void			write_filename(char *flag, char *path, char *start, t_file *list)
+void			write_f(char *flag, char *path, char *start, t_file *list)
 {
 	unsigned int	i;
 	t_nbr			**nbr;
@@ -94,5 +89,7 @@ void			write_filename(char *flag, char *path, char *start, t_file *list)
 		list = list->next;
 		i++;
 	}
+	if (ft_strchr(flag, 'R'))
+		ft_putchar('\n');
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 17:37:40 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/10 21:26:39 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 12:34:19 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_freedtab2(char **tab, int size)
 	tab = NULL;
 }
 
-t_nbr	**count_total()
+t_nbr	**count_total(void)
 {
 	static t_nbr *nbr;
 
