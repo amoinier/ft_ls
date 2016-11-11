@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 13:04:33 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 15:55:32 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct		s_nbr
 	unsigned int	file;
 	int				nb_for_sp;
 	int				sz_for_sp;
+	int				nm_for_sp;
 }					t_nbr;
 
 t_file				*ft_list_dir(char *flag, char *filename);
@@ -57,5 +58,6 @@ void				write_f(char *flag, char *path, char *start, t_file *list);
 t_nbr				**count_total();
 char				*to_lower(char *str);
 void				ft_list_all_dir(char *flag, char *path, char *start);
+char				*check_flag(int ac, char **av);
 
 #endif

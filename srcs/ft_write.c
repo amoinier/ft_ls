@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 12:37:25 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 15:24:30 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,24 @@ static	void	space_nbr(int val, int max)
 	}
 }
 
+static	void	first_part_write(t_file *list, t_nbr **nbr)
+{
+	ft_putstr(list->right);
+	space_nbr(list->nblk, nbr[0]->nb_for_sp);
+	ft_putnbr(list->nblk);
+	ft_putchar(' ');
+	ft_putstr(list->prop);
+	space_nbr(ft_power(10, ft_strlen(list->prop)), nbr[0]->nm_for_sp + 3);
+	ft_putstr(list->groupe);
+	space_nbr(list->size, nbr[0]->sz_for_sp);
+	ft_putnbr(list->size);
+	ft_putchar(' ');
+	ft_putstr(ft_strsub(ctime(&list->date), 4,
+	ft_strlen(ctime(&list->date)) - 13));
+	ft_putchar(' ');
+	ft_putstr(list->name);
+}
+
 static	void	write_info(char *flag, t_file *list)
 {
 	t_nbr		**nbr;
@@ -38,19 +56,7 @@ static	void	write_info(char *flag, t_file *list)
 	nbr = count_total();
 	if (ft_strchr(flag, 'l'))
 	{
-		ft_putstr(list->right);
-		space_nbr(list->nblk, nbr[0]->nb_for_sp);
-		ft_putnbr(list->nblk);
-		ft_putchar(' ');
-		ft_putstr(list->prop);
-		ft_putstr("  ");
-		ft_putstr(list->groupe);
-		space_nbr(list->size, nbr[0]->sz_for_sp);
-		ft_putnbr(list->size);
-		ft_putchar(' ');
-		ft_putstr(ft_strsub(ctime(&list->date), 4, ft_strlen(ctime(&list->date)) - 13));
-		ft_putchar(' ');
-		ft_putstr(list->name);
+		first_part_write(list, nbr);
 		if (list->right[0] == 'l' && list->realname)
 		{
 			ft_putstr(" -> ");
@@ -58,7 +64,8 @@ static	void	write_info(char *flag, t_file *list)
 		}
 		ft_putchar('\n');
 	}
-	else {
+	else
+	{
 		ft_putstr(list->name);
 		ft_putchar('\n');
 	}
@@ -66,10 +73,8 @@ static	void	write_info(char *flag, t_file *list)
 
 void			write_f(char *flag, char *path, char *start, t_file *list)
 {
-	unsigned int	i;
 	t_nbr			**nbr;
 
-	i = 0;
 	nbr = count_total();
 	if (path != start)
 	{
@@ -87,9 +92,6 @@ void			write_f(char *flag, char *path, char *start, t_file *list)
 	{
 		write_info(flag, list);
 		list = list->next;
-		i++;
 	}
-	if (ft_strchr(flag, 'R'))
-		ft_putchar('\n');
 	return ;
 }

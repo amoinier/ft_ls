@@ -6,13 +6,13 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:40:55 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 13:08:44 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 14:10:06 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_file *ft_normal_sort(t_file *start, t_file *new)
+t_file		*ft_normal_sort(t_file *start, t_file *new)
 {
 	t_file	*tmp;
 
@@ -33,7 +33,7 @@ t_file *ft_normal_sort(t_file *start, t_file *new)
 	return (start);
 }
 
-t_file *ft_inverte_sort(t_file *start, t_file *new)
+t_file		*ft_inverte_sort(t_file *start, t_file *new)
 {
 	t_file	*tmp;
 
@@ -54,7 +54,7 @@ t_file *ft_inverte_sort(t_file *start, t_file *new)
 	return (start);
 }
 
-t_file *ft_normal_t_sort(t_file *start, t_file *new)
+t_file		*ft_normal_t_sort(t_file *start, t_file *new)
 {
 	t_file	*tmp;
 
@@ -75,7 +75,7 @@ t_file *ft_normal_t_sort(t_file *start, t_file *new)
 	return (start);
 }
 
-t_file *ft_inverte_t_sort(t_file *start, t_file *new)
+t_file		*ft_inverte_t_sort(t_file *start, t_file *new)
 {
 	t_file	*tmp;
 
@@ -96,20 +96,20 @@ t_file *ft_inverte_t_sort(t_file *start, t_file *new)
 	return (start);
 }
 
-t_file *ft_sort_file(char *flag, t_file *start, t_file *new)
+t_file		*ft_sort_file(char *flag, t_file *start, t_file *new)
 {
 	if (ft_strchr(flag, 'r'))
 	{
 		if (ft_strchr(flag, 't'))
-			return(ft_inverte_t_sort(start, new));
+			return (ft_inverte_t_sort(start, new));
 		else
-			return(ft_inverte_sort(start, new));
+			return (ft_inverte_sort(start, new));
 	}
 	else
 	{
 		if (ft_strchr(flag, 't'))
-			return(ft_normal_t_sort(start, new));
+			return (ft_normal_t_sort(start, new));
 		else
-			return(ft_normal_sort(start, new));
+			return (ft_normal_sort(start, new));
 	}
 }

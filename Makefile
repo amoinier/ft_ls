@@ -6,7 +6,7 @@
 #    By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 12:02:38 by amoinier          #+#    #+#              #
-#    Updated: 2016/11/10 12:56:13 by amoinier         ###   ########.fr        #
+#    Updated: 2016/11/11 16:24:40 by amoinier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,14 +28,14 @@ ODIR =		./objs/
 OBJS =		$(SRCS:.c=.o)
 OBCC =		$(addprefix $(ODIR),$(OBJS))
 
-FLAG =		-Wall -Wextra -Werror -I$(IDIR)
+FLAG =		-g -Wall -Wextra -Werror -I$(IDIR) -I./libft/includes/
 
 all: $(NAME)
 
 $(NAME): header $(OBCC)
 	@echo "  ${BLU}+ Compilation program:${STD} $@"
 	@make -C ./libft/
-	@gcc $(FLAG) $(OBCC) ./libft/libft.a -I$(IDIR) -o $(NAME)
+	@gcc $(FLAG) $(OBCC) -L libft/ -lft -o $(NAME)
 
 $(ODIR)%.o: $(SDIR)%.c
 	@echo "  ${GRE}+ Compilation:${STD} $^"

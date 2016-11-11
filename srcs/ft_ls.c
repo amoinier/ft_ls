@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 13:33:30 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 15:25:13 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 		list = ft_list_dir(flag, path);
 		if (list)
 		{
+			if (ft_strchr(flag, 'R') && path != start)
+				ft_putchar('\n');
 			tmp = list;
 			write_f(flag, path, start, tmp);
 			if (ft_strchr(flag, 'R'))
@@ -47,44 +49,6 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 			}
 		}
 	}
-}
-
-static	void	error_flag(char fl)
-{
-	ft_putstr("ls: illegal option -- ");
-	ft_putchar(fl);
-	ft_putstr("\nusage: ls [-Ralrt] [file ...]\n");
-	exit(0);
-}
-
-char			*check_flag(int ac, char **av)
-{
-	int		i;
-	int		j;
-	int		k;
-	char	*flag;
-
-	flag = ft_strnew(6);
-	i = 1;
-	k = 0;
-	while (i < ac)
-	{
-		j = 1;
-		while (av[i][j])
-		{
-			if (av[i][0] == '-')
-			{
-				if (av[i][j] == 'R' || av[i][j] == 'l' || av[i][j] == 'a' ||
-				av[i][j] == 'r' || av[i][j] == 't')
-					flag[k++] = av[i][j];
-				else if (av[i][j] != ' ' && av[i][j] != '-')
-					error_flag(av[i][j]);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (flag);
 }
 
 int				main(int ac, char **av)
