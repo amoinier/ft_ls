@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 12:32:30 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:19:59 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_file			*ft_real_name(struct stat info, char *newpath, t_file *list)
 	return (list);
 }
 
-t_file			*ft_info_file(t_file *list, char *filename)
+t_file			*ft_info_dir(t_file *list, char *filename)
 {
 	struct stat	info;
 	char		*fpath;
@@ -79,7 +79,29 @@ t_file			*ft_info_file(t_file *list, char *filename)
 	list->nb_block = info.st_blocks;
 	list->right = ft_get_right(info);
 	list->nblk = info.st_nlink;
-	list->prop = getpwuid(info.st_uid)->pw_name;
+	if (getpwuid(info.st_uid) && getpwuid(info.st_uid)->pw_name)
+		list->prop = getpwuid(info.st_uid)->pw_name;
+	else
+		list->prop = "";
+	list->groupe = getgrgid(info.st_gid)->gr_name;
+	list->size = (unsigned int)info.st_size;
+	list->date = info.st_mtime;
+	return (list);
+}
+
+t_file			*ft_info_file(t_file *list, char *filename)
+{
+	struct stat	info;
+
+	lstat(filename, &info);
+	list = ft_real_name(info, filename, list);
+	list->nb_block = info.st_blocks;
+	list->right = ft_get_right(info);
+	list->nblk = info.st_nlink;
+	if (getpwuid(info.st_uid) && getpwuid(info.st_uid)->pw_name)
+		list->prop = getpwuid(info.st_uid)->pw_name;
+	else
+		list->prop = "";
 	list->groupe = getgrgid(info.st_gid)->gr_name;
 	list->size = (unsigned int)info.st_size;
 	list->date = info.st_mtime;

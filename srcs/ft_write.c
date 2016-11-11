@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 15:24:30 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:43:57 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,16 @@ void			write_f(char *flag, char *path, char *start, t_file *list)
 	t_nbr			**nbr;
 
 	nbr = count_total();
+	if (list && list->right && (!list->right[1] || list->right[1] != 'r'))
+	{
+		ft_putstr("\n");
+		ft_putstr(path);
+		ft_putstr(":\n");
+		ft_putstr("ls: ");
+		ft_putstr(path);
+		ft_putstr(": Permission denied\n");
+		return ;
+	}
 	if (path != start)
 	{
 		ft_putstr(path);
@@ -88,7 +98,7 @@ void			write_f(char *flag, char *path, char *start, t_file *list)
 		ft_putnbr(nbr[0]->total);
 		ft_putchar('\n');
 	}
-	while (list->next)
+	while (list && list->name)
 	{
 		write_info(flag, list);
 		list = list->next;

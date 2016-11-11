@@ -6,38 +6,11 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:11:11 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 14:32:47 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:22:03 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-static	t_file	*ft_create_struct(void)
-{
-	t_file	*list;
-
-	if (!(list = (t_file *)malloc(sizeof(*list))))
-		return (NULL);
-	list->prev = NULL;
-	list->name = NULL;
-	list->realname = NULL;
-	list->date = 0;
-	list->next = NULL;
-	return (list);
-}
-
-static	int		nb_for_space(int val)
-{
-	int	i;
-
-	i = 0;
-	while (val != 0)
-	{
-		val = val / 10;
-		i++;
-	}
-	return (i + 2);
-}
 
 t_file			*ft_cg(char *flag, struct dirent *dir, t_file *list, char *file)
 {
@@ -49,7 +22,7 @@ t_file			*ft_cg(char *flag, struct dirent *dir, t_file *list, char *file)
 	tmp->name = ft_strdup(dir->d_name);
 	if (ft_strchr(flag, 'l') || ft_strchr(flag, 't'))
 	{
-		tmp = ft_info_file(tmp, file);
+		tmp = ft_info_dir(tmp, file);
 		nbr[0]->total += tmp->nb_block;
 		if (nb_for_space(tmp->nb_block) >= nbr[0]->nb_for_sp)
 			nbr[0]->nb_for_sp = nb_for_space(tmp->nb_block);

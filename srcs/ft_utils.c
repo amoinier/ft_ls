@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 17:37:40 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 14:24:14 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:22:27 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,32 @@ char	*to_lower(char *str)
 		i++;
 	}
 	return (str);
+}
+
+
+t_file	*ft_create_struct(void)
+{
+	t_file	*list;
+
+	if (!(list = (t_file *)malloc(sizeof(*list))))
+		return (NULL);
+	list->prev = NULL;
+	list->name = NULL;
+	list->realname = NULL;
+	list->date = 0;
+	list->next = NULL;
+	return (list);
+}
+
+int		nb_for_space(int val)
+{
+	int	i;
+
+	i = 0;
+	while (val != 0)
+	{
+		val = val / 10;
+		i++;
+	}
+	return (i + 2);
 }
