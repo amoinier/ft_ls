@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 18:35:13 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/13 22:21:03 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 				nbr[0]->sz_for_sp = nb_for_space(tmp->size);
 				if ((int)ft_strlen(tmp->prop) >= nbr[0]->nm_for_sp)
 				nbr[0]->nm_for_sp = ft_strlen(tmp->prop);
+				tmp->next = NULL;
 				write_f(flag, path, start, tmp);
 			}
 			else if (tmp->right[0] == 'd')
@@ -73,6 +74,13 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 				ft_putstr("ls: ");
 				ft_putstr(path);
 				ft_putstr(": Permission denied\n");
+			}
+			else
+			{
+				ft_putstr("ls: ");
+				ft_putstr(path);
+				ft_putstr(": No such file or directory\n");
+				return ;
 			}
 		}
 	}

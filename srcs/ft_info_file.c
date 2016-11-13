@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 18:19:59 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/13 19:37:06 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char			*ft_get_right(struct stat info)
 {
 	char	*right;
 
-	if (!(right = (char *)malloc(sizeof(right) * (10 + 1))))
+	if (!(right = ft_strnew(10 + 1)))
 		return (NULL);
 	right[0] = ft_let_type(info.st_mode);
 	right[1] = ((info.st_mode & S_IRUSR) ? 'r' : '-');

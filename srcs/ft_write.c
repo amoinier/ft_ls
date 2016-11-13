@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 18:43:57 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/13 19:38:59 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static	void	space_nbr(int val, int max)
 static	void	first_part_write(t_file *list, t_nbr **nbr)
 {
 	ft_putstr(list->right);
-	space_nbr(list->nblk, nbr[0]->nb_for_sp);
+	space_nbr(list->nblk, nbr[0]->nb_for_sp + 1);
 	ft_putnbr(list->nblk);
 	ft_putchar(' ');
 	ft_putstr(list->prop);
@@ -76,23 +76,13 @@ void			write_f(char *flag, char *path, char *start, t_file *list)
 	t_nbr			**nbr;
 
 	nbr = count_total();
-	if (list && list->right && (!list->right[1] || list->right[1] != 'r'))
-	{
-		ft_putstr("\n");
-		ft_putstr(path);
-		ft_putstr(":\n");
-		ft_putstr("ls: ");
-		ft_putstr(path);
-		ft_putstr(": Permission denied\n");
-		return ;
-	}
 	if (path != start)
 	{
 		ft_putstr(path);
 		ft_putchar(':');
 		ft_putchar('\n');
 	}
-	if (ft_strchr(flag, 'l'))
+	if (ft_strchr(flag, 'l') && list->next)
 	{
 		ft_putstr("total ");
 		ft_putnbr(nbr[0]->total);
