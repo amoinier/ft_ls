@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 18:22:21 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/14 02:59:33 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct		s_file
 	unsigned int	nb_block;
 	unsigned int	size;
 	time_t			date;
+	int				major;
+	int				minor;
 	struct s_file	*next;
 	struct s_file	*prev;
 }					t_file;

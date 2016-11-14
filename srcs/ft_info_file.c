@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/13 19:37:06 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/14 03:06:05 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ t_file			*ft_info_dir(t_file *list, char *filename)
 	list->nb_block = info.st_blocks;
 	list->right = ft_get_right(info);
 	list->nblk = info.st_nlink;
+	if (list->right[0] == 'c' || list->right[0] == 'b')
+	{
+		list->major = major(info.st_rdev);
+		list->minor = minor(info.st_rdev);
+	}
 	if (getpwuid(info.st_uid) && getpwuid(info.st_uid)->pw_name)
 		list->prop = getpwuid(info.st_uid)->pw_name;
 	else
@@ -98,6 +103,11 @@ t_file			*ft_info_file(t_file *list, char *filename)
 	list->nb_block = info.st_blocks;
 	list->right = ft_get_right(info);
 	list->nblk = info.st_nlink;
+	if (list->right[0] == 'c' || list->right[0] == 'b')
+	{
+		list->major = major(info.st_rdev);
+		list->minor = minor(info.st_rdev);
+	}
 	if (getpwuid(info.st_uid) && getpwuid(info.st_uid)->pw_name)
 		list->prop = getpwuid(info.st_uid)->pw_name;
 	else
