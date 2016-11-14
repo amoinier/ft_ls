@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/14 12:11:23 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/14 16:30:31 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,27 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 
 int				main(int ac, char **av)
 {
-	char	*path;
 	char	*flag;
+	t_nbr	**nbr;
+	int		i;
 
+	i = 1;
 	flag = check_flag(ac, av);
+	while (av[i][0] == '-')
+		i++;
 	if (ac <= 1 || av[ac - 1][0] == '-')
-		path = ".";
+		ft_list_all_dir(flag, ".", ".");
 	else
-		path = av[ac - 1];
-	ft_list_all_dir(flag, path, path);
+	{
+		nbr = count_total();
+		if (av[i + 1])
+			nbr[0]->multiav = 1;
+		while (av[i] && av[i][0])
+		{
+			ft_list_all_dir(flag, av[i], av[i]);
+			nbr[0]->multiav++;
+			i++;
+		}
+	}
 	return (0);
 }

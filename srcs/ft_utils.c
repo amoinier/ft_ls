@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 17:37:40 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/14 03:42:09 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/14 16:01:02 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_nbr	**count_total(void)
 		nbr->nb_for_sp = 0;
 		nbr->sz_for_sp = 0;
 		nbr->nm_for_sp = 0;
+		nbr->multiav = 0;
 	}
 	return (&nbr);
 }

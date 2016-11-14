@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/14 03:27:07 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/14 16:14:30 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct		s_nbr
 {
 	unsigned int	total;
 	unsigned int	file;
+	int				multiav;
 	int				nb_for_sp;
 	int				sz_for_sp;
 	int				nm_for_sp;

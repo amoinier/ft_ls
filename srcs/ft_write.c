@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/14 03:49:09 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/14 16:05:04 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@ static	void	space_nbr(int val, int max)
 	{
 		ft_putchar(' ');
 		i++;
+	}
+}
+
+static	void	ft_write_date(t_file *list)
+{
+	if (time(NULL) - list->date < 15552000)
+	{
+		ft_putstr(ft_strsub(ctime(&list->date), 4,
+		ft_strlen(ctime(&list->date)) - 13));
+	}
+	else
+	{
+		ft_putstr(ft_strsub(ctime(&list->date), 4, ft_strlen(ctime(&list->date)) - 18));
+		ft_putstr(ft_strsub(ctime(&list->date), 19, 5));
 	}
 }
 
@@ -53,8 +67,7 @@ static	void	first_part_write(t_file *list, t_nbr **nbr)
 		ft_putnbr(list->size);
 	}
 	ft_putchar(' ');
-	ft_putstr(ft_strsub(ctime(&list->date), 4,
-	ft_strlen(ctime(&list->date)) - 13));
+	ft_write_date(list);
 	ft_putchar(' ');
 	ft_putstr(list->name);
 }
@@ -86,8 +99,10 @@ void			write_f(char *flag, char *path, char *start, t_file *list)
 	t_nbr			**nbr;
 
 	nbr = count_total();
-	if (path != start)
+	if (path != start || nbr[0]->multiav > 0)
 	{
+		if (nbr[0]->multiav > 1)
+			ft_putchar('\n');
 		ft_putstr(path);
 		ft_putchar(':');
 		ft_putchar('\n');
