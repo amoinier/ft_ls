@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/14 03:07:37 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/14 03:49:09 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,22 @@ static	void	space_nbr(int val, int max)
 static	void	first_part_write(t_file *list, t_nbr **nbr)
 {
 	ft_putstr(list->right);
-	space_nbr(list->nblk, nbr[0]->nb_for_sp + 1);
+	space_nbr(list->nblk, nbr[0]->nb_for_sp);
 	ft_putnbr(list->nblk);
 	ft_putchar(' ');
 	ft_putstr(list->prop);
 	space_nbr(ft_power(10, ft_strlen(list->prop)), nbr[0]->nm_for_sp + 3);
 	ft_putstr(list->groupe);
-	space_nbr(ft_power(10, ft_strlen(list->prop)), nbr[0]->nm_for_sp + 3);
 	if (list->right[0] == 'c' || list->right[0] == 'b')
 	{
+		space_nbr(ft_power(10, ft_strlen(list->prop)), nbr[0]->nm_for_sp + 3);
 		ft_putnbr(list->major);
 		ft_putstr(", ");
 		ft_putnbr(list->minor);
 	}
 	else
 	{
+		space_nbr(list->size, nbr[0]->sz_for_sp);
 		ft_putnbr(list->size);
 	}
 	ft_putchar(' ');

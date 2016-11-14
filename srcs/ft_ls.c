@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/13 22:21:03 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/14 03:45:00 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,16 @@ static	void	flag_gr(char *flag, char *path, char *start, t_file *tmp)
 
 void			ft_list_all_dir(char *flag, char *path, char *start)
 {
-	t_file	*list;
 	t_file	*tmp;
 	t_nbr	**nbr;
 
 	if (path)
 	{
-		list = ft_list_dir(flag, path);
-		if (list)
+		tmp = ft_list_dir(flag, path);
+		if (tmp)
 		{
 			if (ft_strchr(flag, 'R') && path != start)
 				ft_putchar('\n');
-			tmp = list;
 			write_f(flag, path, start, tmp);
 			if (ft_strchr(flag, 'R'))
 			{
@@ -46,6 +44,8 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 					if (ft_strcmp(tmp->name, ".") && ft_strcmp(tmp->name, ".."))
 						flag_gr(flag, path, start, tmp);
 					tmp = tmp->next;
+					free_elemt_list(tmp->prev);
+					tmp->prev = NULL;
 				}
 			}
 		}
