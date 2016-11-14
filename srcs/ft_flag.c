@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 14:18:36 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/11 14:19:14 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/14 11:45:36 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static	void	error_flag(char fl)
 	ft_putstr("ls: illegal option -- ");
 	ft_putchar(fl);
 	ft_putstr("\nusage: ls [-Ralrt] [file ...]\n");
-	exit(0);
+	exit(1);
 }
 
 static	char	*do_flag(char *flag, char c, int *k)
@@ -25,7 +25,7 @@ static	char	*do_flag(char *flag, char c, int *k)
 	if (c == 'R' || c == 'l' || c == 'a' ||
 	c == 'r' || c == 't')
 		flag[k[0]++] = c;
-	else if (c != ' ' && c != '-')
+	else if (c != ' ')
 		error_flag(c);
 	return (flag);
 }

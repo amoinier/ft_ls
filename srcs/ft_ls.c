@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/14 03:45:00 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/11/14 12:11:23 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,19 @@ static	void	flag_gr(char *flag, char *path, char *start, t_file *tmp)
 	char	*fpath;
 	char	*newpath;
 
-	fpath = ft_strjoin(path, "/");
-	newpath = ft_strjoin(fpath, tmp->name);
+	if (path[ft_strlen(path) - 1] != '/')
+	{
+		fpath = ft_strjoin(path, "/");
+		newpath = ft_strjoin(fpath, tmp->name);
+	}
+	else
+		newpath = ft_strjoin(path, tmp->name);
 	ft_list_all_dir(flag, newpath, start);
-	ft_strdel(&fpath);
-	ft_strdel(&newpath);
+	if (path[ft_strlen(path) - 1] != '/')
+	{
+		ft_strdel(&fpath);
+		ft_strdel(&newpath);
+	}
 }
 
 void			ft_list_all_dir(char *flag, char *path, char *start)
@@ -74,13 +82,6 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 				ft_putstr("ls: ");
 				ft_putstr(path);
 				ft_putstr(": Permission denied\n");
-			}
-			else
-			{
-				ft_putstr("ls: ");
-				ft_putstr(path);
-				ft_putstr(": No such file or directory\n");
-				return ;
 			}
 		}
 	}
