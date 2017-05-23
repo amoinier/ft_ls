@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/14 16:30:31 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/23 14:51:00 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,13 @@ int				main(int ac, char **av)
 
 	i = 1;
 	flag = check_flag(ac, av);
-	while (av[i][0] == '-')
+	while (av[i] && av[i][0] == '-') {
 		i++;
-	if (ac <= 1 || av[ac - 1][0] == '-')
+	}
+	if (ac <= 1 || av[ac - 1][0] == '-') {
 		ft_list_all_dir(flag, ".", ".");
+		av[i] = (av[i] ? av[i] : ".");
+	}
 	else
 	{
 		nbr = count_total();

@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/14 14:33:01 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/23 14:52:17 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ char			*ft_get_right(struct stat info)
 
 t_file			*ft_real_name(struct stat info, char *newpath, t_file *list)
 {
-	char	buf[1024];
+	char	*buf;
 
+	if (!(buf = ft_strnew(1024)))
+		return (list);
 	list->realname = NULL;
 	if (S_ISLNK(info.st_mode))
 	{
@@ -85,7 +87,6 @@ t_file			*ft_add_info(t_file *list, struct stat info, char *filename)
 		ft_putstr("ls: ");
 		ft_putstr(filename);
 		ft_putstr(": No such file or directory\n");
-		exit(1);
 	}
 	list = ft_real_name(info, filename, list);
 	list->nb_block = info.st_blocks;

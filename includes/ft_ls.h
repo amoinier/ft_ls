@@ -6,14 +6,14 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/14 16:14:30 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/23 13:53:25 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
 
-# include "libft.h"
+# include "../libft/includes/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
