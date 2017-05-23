@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/23 14:52:17 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/23 15:34:21 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,14 @@ t_file			*ft_real_name(struct stat info, char *newpath, t_file *list)
 {
 	char	*buf;
 
-	if (!(buf = ft_strnew(1024)))
-		return (list);
 	list->realname = NULL;
 	if (S_ISLNK(info.st_mode))
 	{
+		if (!(buf = ft_strnew(1024)))
+			return (list);
 		readlink(newpath, buf, 1024);
 		list->realname = ft_strdup(buf);
+		ft_strdel(&buf);
 	}
 	return (list);
 }

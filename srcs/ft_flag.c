@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 14:18:36 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/23 14:34:04 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/23 15:57:26 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char			*check_flag(int ac, char **av)
 	int		k;
 	char	*flag;
 
-	flag = ft_strnew(6);
+	if (!(flag = ft_strnew(6)))
+		return (NULL);
 	i = 1;
 	k = 0;
 	while (i < ac)

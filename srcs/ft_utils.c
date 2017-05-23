@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 17:37:40 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/14 16:01:02 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/23 15:48:35 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,15 @@ int		nb_for_space(int val)
 	return (i + 2);
 }
 
-void	free_elemt_list(t_file *list)
+t_file	*free_elemt_list(t_file *list)
 {
 	if (list && list->name)
 	ft_strdel(&list->name);
 	if (list && list->right)
 	ft_strdel(&list->right);
+	if (list && list->realname)
+	ft_strdel(&list->realname);
 	free(list);
 	list = NULL;
+	return (list);
 }

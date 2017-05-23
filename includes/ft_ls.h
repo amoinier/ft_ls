@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/23 13:53:25 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/23 15:48:18 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void				ft_list_all_dir(char *flag, char *path, char *start);
 char				*check_flag(int ac, char **av);
 t_file				*ft_create_struct(void);
 int					nb_for_space(int val);
-void				free_elemt_list(t_file *list);
+t_file				*free_elemt_list(t_file *list);
 
 #endif

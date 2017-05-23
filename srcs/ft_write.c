@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/14 16:05:04 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/23 15:42:18 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,24 @@ static	void	space_nbr(int val, int max)
 
 static	void	ft_write_date(t_file *list)
 {
+	char	*subcharone;
+	char	*subchartwo;
+	char	*subcharthree;
+
 	if (time(NULL) - list->date < 15552000)
 	{
-		ft_putstr(ft_strsub(ctime(&list->date), 4,
-		ft_strlen(ctime(&list->date)) - 13));
+		subcharthree = ft_strsub(ctime(&list->date), 4,	ft_strlen(ctime(&list->date)) - 13);
+		ft_putstr(subcharthree);
+		ft_strdel(&subcharthree);
 	}
 	else
 	{
-		ft_putstr(ft_strsub(ctime(&list->date), 4, ft_strlen(ctime(&list->date)) - 18));
-		ft_putstr(ft_strsub(ctime(&list->date), 19, 5));
+		subcharone = ft_strsub(ctime(&list->date), 4, ft_strlen(ctime(&list->date)) - 18);
+		subchartwo = ft_strsub(ctime(&list->date), 19, 5);
+		ft_putstr(subcharone);
+		ft_putstr(subchartwo);
+		ft_strdel(&subcharone);
+		ft_strdel(&subchartwo);
 	}
 }
 
