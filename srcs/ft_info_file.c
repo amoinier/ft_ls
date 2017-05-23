@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/23 15:34:21 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/23 17:50:46 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static	char	ft_let_type(mode_t st_mode)
 		return ('-');
 }
 
-char			*ft_get_right(struct stat info)
+static	char	*ft_get_right(struct stat info)
 {
 	char	*right;
 
@@ -65,43 +65,29 @@ char			*ft_get_right(struct stat info)
 	return (right);
 }
 
-t_file			*ft_real_name(struct stat info, char *newpath, t_file *list)
+static	char	*ft_real_name(struct stat info, char *newpath)
 {
 	char	*buf;
 
-	list->realname = NULL;
 	if (S_ISLNK(info.st_mode))
 	{
 		if (!(buf = ft_strnew(1024)))
-			return (list);
+			return (NULL);
 		readlink(newpath, buf, 1024);
-		list->realname = ft_strdup(buf);
-		ft_strdel(&buf);
+		return (ft_strdup(buf));
 	}
-	return (list);
+	return (NULL);
 }
 
 t_file			*ft_add_info(t_file *list, struct stat info, char *filename)
 {
-	if (!info.st_dev)
-	{
-		ft_putstr("ls: ");
-		ft_putstr(filename);
-		ft_putstr(": No such file or directory\n");
-	}
-	list = ft_real_name(info, filename, list);
+	list->realname = ft_real_name(info, filename);
 	list->nb_block = info.st_blocks;
 	list->right = ft_get_right(info);
 	list->nblk = info.st_nlink;
-	if (list->right[0] == 'c' || list->right[0] == 'b')
-	{
-		list->major = major(info.st_rdev);
-		list->minor = minor(info.st_rdev);
-	}
-	if (getpwuid(info.st_uid) && getpwuid(info.st_uid)->pw_name)
-		list->prop = getpwuid(info.st_uid)->pw_name;
-	else
-		list->prop = "";
+	list->major = (list->right[0] == 'c' || list->right[0] == 'b' ? major(info.st_rdev) : list->major);
+	list->minor = (list->right[0] == 'c' || list->right[0] == 'b' ? minor(info.st_rdev) : list->minor);
+	list->prop = (getpwuid(info.st_uid) && getpwuid(info.st_uid)->pw_name ? getpwuid(info.st_uid)->pw_name : "");
 	list->groupe = getgrgid(info.st_gid)->gr_name;
 	list->size = (unsigned int)info.st_size;
 	list->date = info.st_mtime;
