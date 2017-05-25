@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/23 17:50:46 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/25 16:19:24 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,13 @@ static	char	*ft_real_name(struct stat info, char *newpath)
 
 t_file			*ft_add_info(t_file *list, struct stat info, char *filename)
 {
+	if (!info.st_dev || info.st_dev < 0)
+ 	{
+ 		ft_putstr("ls: ");
+ 		ft_putstr(filename);
+ 		ft_putstr(": No such file or directory\n");
+ 	}
+
 	list->realname = ft_real_name(info, filename);
 	list->nb_block = info.st_blocks;
 	list->right = ft_get_right(info);
@@ -105,6 +112,7 @@ t_file			*ft_info_dir(t_file *list, char *filename)
 	newpath = ft_strjoin(fpath, list->name);
 	lstat(newpath, &info);
 	list = ft_add_info(list, info, newpath);
+	list->type = ft_strdup("dir");
 	ft_strdel(&fpath);
 	ft_strdel(&newpath);
 	return (list);
@@ -116,5 +124,6 @@ t_file			*ft_info_file(t_file *list, char *filename)
 
 	lstat(filename, &info);
 	list = ft_add_info(list, info, filename);
+	list->type = ft_strdup("file");
 	return (list);
 }

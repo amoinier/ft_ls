@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:40:55 by amoinier          #+#    #+#             */
-/*   Updated: 2016/11/14 11:15:24 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/25 18:43:53 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,14 @@ t_file		*ft_normal_t_sort(t_file *start, t_file *new)
 	t_file	*tmp;
 
 	tmp = start;
-	while (tmp && tmp->name && (int)(tmp->date - new->date) >= 0)
+	while (tmp && tmp->name && (int)(tmp->date - new->date) >= 0) {
+		if ((int)(tmp->date - new->date) == 0) {
+			if (ft_strcmp(to_lower(tmp->name), to_lower(new->name)) < 0) {
+				break ;
+			}
+		}
 		tmp = tmp->next;
+	}
 	return (ft_sort(tmp, start, new));
 }
 

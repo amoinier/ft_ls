@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/23 17:50:55 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/25 16:52:42 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,13 @@ void			write_f(char *flag, char *path, char *start, t_file *list)
 	nbr = count_total();
 	if (path != start || nbr[0]->multiav > 0)
 	{
-		if (nbr[0]->multiav > 1)
+		if (nbr[0]->multiav > 1 && ft_strcmp(list->type, "dir") == 0)
 			ft_putchar('\n');
+		if (ft_strcmp(list->type, "dir") == 0) {
 			ft_putstr(path);
 			ft_putchar(':');
 			ft_putchar('\n');
+		}
 	}
 	if (ft_strchr(flag, 'l') && list->next)
 	{

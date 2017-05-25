@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:11:11 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/23 18:19:43 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/25 12:45:18 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static	t_file			*ft_g(char *flag, struct dirent *dir, t_file *list, char *file)
 		if (ft_strchr(flag, 'l') || ft_strchr(flag, 't'))
 		{
 			tmp = ft_info_dir(tmp, file);
-			
+
 			nbr[0]->total += tmp->nb_block;
 			if (nb_for_space(tmp->nb_block) >= nbr[0]->nb_for_sp)
 				nbr[0]->nb_for_sp = nb_for_space(tmp->nb_block);

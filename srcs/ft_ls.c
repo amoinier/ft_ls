@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/23 18:36:02 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/25 17:42:39 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 			if (ft_strchr(flag, 'R') && path != start)
 				ft_putchar('\n');
 
+			tmp->type = ft_strdup("dir");
 			write_f(flag, path, start, tmp);
 
 			if (ft_strchr(flag, 'R'))
@@ -105,6 +106,64 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 	}
 }
 
+char			**check_type(int ac, char **av, int nbr_file)
+{
+	int		j;
+	int		k;
+	int 	tmpint;
+	char	*tmp;
+	char	**file;
+	struct stat	info;
+
+	if (!(file = (char **)malloc(sizeof(char *) * (ac - nbr_file + 1))))
+		return NULL;
+
+	j = nbr_file;
+	while (av[j] && av[j][0])
+	{
+		k = j + 1;
+		tmp = NULL;
+		while (av[k] && av[k][0]) {
+			if (ft_strcmp(av[j], av[k]) > 0) {
+				tmp = ft_strdup(av[k]);
+				tmpint = k;
+			}
+			k++;
+		}
+		if (tmp) {
+			av[tmpint] = ft_strdup(av[j]);
+			av[j] = ft_strdup(tmp);
+		}
+		j++;
+	}
+
+	j = nbr_file;
+	k = 0;
+	while (av[j] && av[j][0])
+	{
+		lstat(av[j], &info);
+		if (!S_ISDIR(info.st_mode)) {
+			file[k] = ft_strdup(av[j]);
+			k++;
+		}
+		j++;
+	}
+
+	j = nbr_file;
+	while (av[j] && av[j][0])
+	{
+		lstat(av[j], &info);
+		if (S_ISDIR(info.st_mode)) {
+			file[k] = ft_strdup(av[j]);
+			k++;
+		}
+		j++;
+	}
+	file[k] = "\0";
+
+	return (file);
+}
+
 int				main(int ac, char **av)
 {
 	char	*flag;
@@ -113,10 +172,10 @@ int				main(int ac, char **av)
 
 	i = 1;
 	flag = check_flag(ac, av);
-	while (av[i] && av[i][0] == '-') {
+	while (av[i] && av[i][0] == '-' && (av[i][1] && ft_strchr("Ralrt1-", av[i][1]))) {
 		i++;
 	}
-	if (ac <= 1 || av[ac - 1][0] == '-') {
+	if (ac <= 1 || (av[ac - 1][0] == '-' && (av[ac - 1][1] && ft_strchr("Ralrt1-", av[ac - 1][1])))) {
 		ft_list_all_dir(flag, ".", ".");
 		av[i] = (av[i] ? av[i] : ".");
 	}
@@ -125,6 +184,8 @@ int				main(int ac, char **av)
 		nbr = count_total();
 		if (av[i + 1])
 			nbr[0]->multiav = 1;
+		av = check_type(ac, av, i);
+		i = 0;
 		while (av[i] && av[i][0])
 		{
 			ft_list_all_dir(flag, av[i], av[i]);
