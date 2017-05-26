@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/25 16:52:42 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/26 18:26:51 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,29 @@ static	void	space_nbr(int val, int max)
 	}
 }
 
-static	void	ft_write_date(t_file *list)
+static	void	ft_write_date(t_file *list, t_nbr **nbr)
 {
 	char	*subcharone;
 	char	*subchartwo;
-	char	*subcharthree;
+	char 	**date;
 
+	date = ft_strsplit(ctime(&list->date), ' ');
 	if (time(NULL) - list->date < 15552000)
 	{
-		subcharthree = ft_strsub(ctime(&list->date), 4,	ft_strlen(ctime(&list->date)) - 13);
-		ft_putstr(subcharthree);
-		ft_strdel(&subcharthree);
+
+		ft_putstr(date[1]);
+		if (time(NULL) - list->date < 0)
+			space_nbr(ft_atoi(date[2]), nbr[0]->dy_for_sp);
+		else
+			ft_putchar(' ');
+		ft_putstr(date[2]);
+		ft_putchar(' ');
+		if (time(NULL) - list->date >= 0)
+			ft_putstr(ft_strsub(date[3], 0, ft_strlen(date[3]) - 3));
+		else {
+			ft_putchar(' ');
+			ft_putstr(ft_strsub(date[4], 0, ft_strlen(date[4]) - 1));
+		}
 	}
 	else
 	{
@@ -49,6 +61,7 @@ static	void	ft_write_date(t_file *list)
 		subchartwo = ft_strsub(ctime(&list->date), 19, 5);
 		ft_putstr(subcharone);
 		ft_putstr(subchartwo);
+
 		ft_strdel(&subcharone);
 		ft_strdel(&subchartwo);
 	}
@@ -76,7 +89,7 @@ static	void	first_part_write(t_file *list, t_nbr **nbr)
 		ft_putnbr(list->size);
 	}
 	ft_putchar(' ');
-	ft_write_date(list);
+	ft_write_date(list, nbr);
 	ft_putchar(' ');
 	ft_putstr(list->name);
 }

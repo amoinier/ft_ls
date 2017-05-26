@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/25 16:16:54 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/26 15:56:56 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct		s_nbr
 	int				nb_for_sp;
 	int				sz_for_sp;
 	int				nm_for_sp;
+	int				dy_for_sp;
 }					t_nbr;
 
 t_file				*ft_list_dir(char *flag, char *filename);

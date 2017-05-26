@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/25 17:42:39 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/26 18:29:13 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,41 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 	t_file		*tmp;
 	t_nbr		**nbr;
 	struct stat	info;
+	char		**date;
 
 	if (path)
 	{
 		tmp = ft_list_dir(flag, path);
 
 		lstat(path, &info);
+		nbr = count_total();
 		if ((S_ISLNK(info.st_mode) && ft_strchr(flag, 'l')) || !tmp)
 		{
-			nbr = count_total();
 			tmp = ft_create_struct();
 			tmp->name = path;
 			tmp = ft_info_file(tmp, path);
 
+			date = ft_strsplit(ctime(&tmp->date), ' ');
+
 			if (tmp->right[0] != 'd' && tmp->right[1] == 'r' && path == start)
 			{
-				if (nb_for_space(tmp->nb_block) >= nbr[0]->nb_for_sp)
-					nbr[0]->nb_for_sp = nb_for_space(tmp->nb_block);
+				if (nb_for_space(tmp->nblk) >= nbr[0]->nb_for_sp)
+					nbr[0]->nb_for_sp = nb_for_space(tmp->nblk);
 				if (nb_for_space(tmp->size) >= nbr[0]->sz_for_sp)
 					nbr[0]->sz_for_sp = nb_for_space(tmp->size);
 				if ((int)ft_strlen(tmp->prop) >= nbr[0]->nm_for_sp)
 					nbr[0]->nm_for_sp = ft_strlen(tmp->prop);
+				if (nb_for_space(ft_atoi(date[2])) >= nbr[0]->dy_for_sp)
+					nbr[0]->dy_for_sp = nb_for_space(ft_atoi(date[2]));
 
 				tmp->next = NULL;
 
 				write_f(flag, path, start, tmp);
+				nbr[0]->total = 0;
+				nbr[0]->nb_for_sp = 0;
+				nbr[0]->sz_for_sp = 0;
+				nbr[0]->nm_for_sp = 0;
+				nbr[0]->dy_for_sp = 0;
 			}
 			else if (tmp->right[0] == 'd')
 			{
@@ -85,6 +95,11 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 
 			tmp->type = ft_strdup("dir");
 			write_f(flag, path, start, tmp);
+			nbr[0]->total = 0;
+			nbr[0]->nb_for_sp = 0;
+			nbr[0]->sz_for_sp = 0;
+			nbr[0]->nm_for_sp = 0;
+			nbr[0]->dy_for_sp = 0;
 
 			if (ft_strchr(flag, 'R'))
 			{

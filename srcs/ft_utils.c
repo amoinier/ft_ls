@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 17:37:40 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/23 15:48:35 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/05/26 15:58:36 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_nbr	**count_total(void)
 		nbr->nb_for_sp = 0;
 		nbr->sz_for_sp = 0;
 		nbr->nm_for_sp = 0;
+		nbr->dy_for_sp = 0;
 		nbr->multiav = 0;
 	}
 	return (&nbr);
@@ -89,13 +90,14 @@ int		nb_for_space(int val)
 {
 	int	i;
 
-	i = 0;
+	i = 2;
+	val = (val == 0 ? 1 : val);
 	while (val != 0)
 	{
 		val = val / 10;
 		i++;
 	}
-	return (i + 2);
+	return (i);
 }
 
 t_file	*free_elemt_list(t_file *list)
