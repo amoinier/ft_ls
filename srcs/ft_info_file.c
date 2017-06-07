@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/25 16:19:24 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/07 17:24:05 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static	char	*ft_real_name(struct stat info, char *newpath)
 		if (!(buf = ft_strnew(1024)))
 			return (NULL);
 		readlink(newpath, buf, 1024);
-		return (ft_strdup(buf));
+		return (buf);
 	}
 	return (NULL);
 }
@@ -94,8 +94,8 @@ t_file			*ft_add_info(t_file *list, struct stat info, char *filename)
 	list->nblk = info.st_nlink;
 	list->major = (list->right[0] == 'c' || list->right[0] == 'b' ? major(info.st_rdev) : list->major);
 	list->minor = (list->right[0] == 'c' || list->right[0] == 'b' ? minor(info.st_rdev) : list->minor);
-	list->prop = (getpwuid(info.st_uid) && getpwuid(info.st_uid)->pw_name ? getpwuid(info.st_uid)->pw_name : "");
-	list->groupe = getgrgid(info.st_gid)->gr_name;
+	list->prop = (getpwuid(info.st_uid) && getpwuid(info.st_uid)->pw_name ? ft_strdup(getpwuid(info.st_uid)->pw_name) : ft_strdup(""));
+	list->groupe = ft_strdup(getgrgid(info.st_gid)->gr_name);
 	list->size = (unsigned int)info.st_size;
 	list->date = info.st_mtime;
 

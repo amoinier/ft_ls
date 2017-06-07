@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/26 15:56:56 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/07 15:19:34 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ t_file				*ft_info_dir(t_file *list, char *filename);
 t_file				*ft_info_file(t_file *list, char *filename);
 
 void				ft_freedtab2(char **tab, int size);
+void 				ft_freestr(char *str);
+void 				free_list(t_file *list);
+void 				set_to_zero();
+
+
 t_file				*ft_sort_file(char *flag, t_file *start, t_file *new);
 t_nbr				**count_total();
 char				*to_lower(char *str);

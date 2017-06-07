@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:40:55 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/26 11:48:59 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/07 17:43:18 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static	t_file	*ft_sort(t_file *tmp, t_file *start, t_file *new)
 	return (start);
 }
 
-t_file		*ft_normal_sort(t_file *start, t_file *new)
+static	t_file	*ft_normal_sort(t_file *start, t_file *new)
 {
 	t_file	*tmp;
 
@@ -38,7 +38,7 @@ t_file		*ft_normal_sort(t_file *start, t_file *new)
 	return (ft_sort(tmp, start, new));
 }
 
-t_file		*ft_inverte_sort(t_file *start, t_file *new)
+static	t_file	*ft_inverte_sort(t_file *start, t_file *new)
 {
 	t_file	*tmp;
 
@@ -48,7 +48,7 @@ t_file		*ft_inverte_sort(t_file *start, t_file *new)
 	return (ft_sort(tmp, start, new));
 }
 
-t_file		*ft_normal_t_sort(t_file *start, t_file *new)
+static	t_file	*ft_normal_t_sort(t_file *start, t_file *new)
 {
 	t_file	*tmp;
 
@@ -64,7 +64,7 @@ t_file		*ft_normal_t_sort(t_file *start, t_file *new)
 	return (ft_sort(tmp, start, new));
 }
 
-t_file		*ft_inverte_t_sort(t_file *start, t_file *new)
+static	t_file	*ft_inverte_t_sort(t_file *start, t_file *new)
 {
 	t_file	*tmp;
 

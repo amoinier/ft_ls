@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 17:37:40 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/26 15:58:36 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/07 17:50:46 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,24 @@ void	ft_freedtab2(char **tab, int size)
 	i = size;
 	if (tab == NULL)
 	{
-		free(tab);
+		ft_strdel(tab);
 		tab = NULL;
 		return ;
 	}
 	while (i >= 0)
 	{
-		free(tab[i]);
+		ft_strdel(&tab[i]);
 		tab[i] = NULL;
 		i--;
 	}
 	free(tab);
 	tab = NULL;
+}
+
+void 	ft_freestr(char *str)
+{
+	free(str);
+	str = NULL;
 }
 
 t_nbr	**count_total(void)
@@ -74,6 +80,7 @@ t_file	*ft_create_struct(void)
 	if (!(list = (t_file *)malloc(sizeof(*list))))
 		return (NULL);
 	list->prev = NULL;
+	list->type = NULL;
 	list->name = NULL;
 	list->realname = NULL;
 	list->right = NULL;
@@ -102,13 +109,55 @@ int		nb_for_space(int val)
 
 t_file	*free_elemt_list(t_file *list)
 {
-	if (list && list->name)
-	ft_strdel(&list->name);
-	if (list && list->right)
-	ft_strdel(&list->right);
-	if (list && list->realname)
-	ft_strdel(&list->realname);
+	if (list)
+	{
+		if (list->name)
+			ft_strdel(&list->name);
+		if (list->realname)
+			ft_strdel(&list->realname);
+		if (list->right)
+			ft_strdel(&list->right);
+		if (list->realname)
+			ft_strdel(&list->realname);
+		if (list->type)
+			ft_strdel(&list->type);
+		if (list->prop)
+			ft_strdel(&list->prop);
+		if (list->groupe)
+			ft_strdel(&list->groupe);
+	}
 	free(list);
 	list = NULL;
 	return (list);
+}
+
+void 	free_list(t_file *list)
+{
+	t_file	*tmp;
+
+	tmp = list;
+	while (tmp->next)
+	{
+		if (tmp->prev)
+			tmp->prev = free_elemt_list(tmp->prev);
+		tmp = tmp->next;
+	}
+	if (tmp->prev)
+		tmp->prev = free_elemt_list(tmp->prev);
+	if (tmp->next)
+		tmp->next = free_elemt_list(tmp->next);
+	if (tmp)
+		tmp = free_elemt_list(tmp);
+}
+
+void 	set_to_zero()
+{
+	t_nbr 		**nbr;
+
+	nbr = count_total();
+	nbr[0]->total = 0;
+	nbr[0]->nb_for_sp = 0;
+	nbr[0]->sz_for_sp = 0;
+	nbr[0]->nm_for_sp = 0;
+	nbr[0]->dy_for_sp = 0;
 }

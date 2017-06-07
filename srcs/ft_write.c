@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2017/05/26 18:26:51 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/07 16:20:00 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,24 @@ static	void	ft_write_date(t_file *list, t_nbr **nbr)
 		if (time(NULL) - list->date < 0)
 			space_nbr(ft_atoi(date[2]), nbr[0]->dy_for_sp);
 		else
+		{
 			ft_putchar(' ');
+			ft_putchar(' ');
+		}
 		ft_putstr(date[2]);
 		ft_putchar(' ');
 		if (time(NULL) - list->date >= 0)
-			ft_putstr(ft_strsub(date[3], 0, ft_strlen(date[3]) - 3));
-		else {
-			ft_putchar(' ');
-			ft_putstr(ft_strsub(date[4], 0, ft_strlen(date[4]) - 1));
+		{
+			subcharone = ft_strsub(date[3], 0, ft_strlen(date[3]) - 3);
+			ft_putstr(subcharone);
 		}
+		else
+		{
+			ft_putchar(' ');
+			subcharone = ft_strsub(date[4], 0, ft_strlen(date[4]) - 1);
+			ft_putstr(subcharone);
+		}
+		ft_strdel(&subcharone);
 	}
 	else
 	{
@@ -65,6 +74,7 @@ static	void	ft_write_date(t_file *list, t_nbr **nbr)
 		ft_strdel(&subcharone);
 		ft_strdel(&subchartwo);
 	}
+	ft_freedtab2(date, 5);
 }
 
 static	void	first_part_write(t_file *list, t_nbr **nbr)
@@ -125,7 +135,8 @@ void			write_f(char *flag, char *path, char *start, t_file *list)
 	{
 		if (nbr[0]->multiav > 1 && ft_strcmp(list->type, "dir") == 0)
 			ft_putchar('\n');
-		if (ft_strcmp(list->type, "dir") == 0) {
+		if (ft_strcmp(list->type, "dir") == 0)
+		{
 			ft_putstr(path);
 			ft_putchar(':');
 			ft_putchar('\n');
