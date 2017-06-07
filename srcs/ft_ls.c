@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/07 18:06:32 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/07 19:11:04 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 				ft_putstr(path);
 				ft_putstr(": Permission denied\n");
 			}
-			if (tmp)
-				free_list(tmp);
+			free_list(tmp);
 		}
 		else if (tmp)
 		{
@@ -104,12 +103,8 @@ void			ft_list_all_dir(char *flag, char *path, char *start)
 						flag_gr(flag, path, start, ttest);
 					ttest = ttest->next;
 				}
-				free_list(tmp);
 			}
-			else
-			{
-				free_list(tmp);
-			}
+			free_list(tmp);
 		}
 	}
 }
@@ -175,6 +170,7 @@ char			**check_type(int ac, char **av, int nbr_file)
 int				main(int ac, char **av)
 {
 	char	*flag;
+	char	**argu;
 	t_nbr	**nbr;
 	int		i;
 
@@ -192,14 +188,15 @@ int				main(int ac, char **av)
 		nbr = count_total();
 		if (av[i + 1])
 			nbr[0]->multiav = 1;
-		av = check_type(ac, av, i);
+		argu = check_type(ac, av, i);
 		i = 0;
-		while (av[i] && av[i][0])
+		while (argu[i] && argu[i][0])
 		{
-			ft_list_all_dir(flag, av[i], av[i]);
+			ft_list_all_dir(flag, argu[i], argu[i]);
 			nbr[0]->multiav++;
 			i++;
 		}
+		ft_strdel(argu);
 	}
 	ft_strdel(&flag);
 	return (1);

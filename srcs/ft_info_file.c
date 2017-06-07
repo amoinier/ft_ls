@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/07 17:24:05 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/07 18:59:32 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static	char	*ft_real_name(struct stat info, char *newpath)
 
 t_file			*ft_add_info(t_file *list, struct stat info, char *filename)
 {
+	struct passwd	*pwuid;
+
 	if (!info.st_dev || info.st_dev < 0)
  	{
  		ft_putstr("ls: ");
@@ -88,13 +90,15 @@ t_file			*ft_add_info(t_file *list, struct stat info, char *filename)
  		ft_putstr(": No such file or directory\n");
  	}
 
+	pwuid = getpwuid(info.st_uid);
+
 	list->realname = ft_real_name(info, filename);
 	list->nb_block = info.st_blocks;
 	list->right = ft_get_right(info);
 	list->nblk = info.st_nlink;
 	list->major = (list->right[0] == 'c' || list->right[0] == 'b' ? major(info.st_rdev) : list->major);
 	list->minor = (list->right[0] == 'c' || list->right[0] == 'b' ? minor(info.st_rdev) : list->minor);
-	list->prop = (getpwuid(info.st_uid) && getpwuid(info.st_uid)->pw_name ? ft_strdup(getpwuid(info.st_uid)->pw_name) : ft_strdup(""));
+	list->prop = (pwuid && pwuid->pw_name ? ft_strdup(pwuid->pw_name) : ft_strdup(""));
 	list->groupe = ft_strdup(getgrgid(info.st_gid)->gr_name);
 	list->size = (unsigned int)info.st_size;
 	list->date = info.st_mtime;
@@ -115,6 +119,7 @@ t_file			*ft_info_dir(t_file *list, char *filename)
 	list->type = ft_strdup("dir");
 	ft_strdel(&fpath);
 	ft_strdel(&newpath);
+
 	return (list);
 }
 
@@ -125,5 +130,6 @@ t_file			*ft_info_file(t_file *list, char *filename)
 	lstat(filename, &info);
 	list = ft_add_info(list, info, filename);
 	list->type = ft_strdup("file");
+
 	return (list);
 }
