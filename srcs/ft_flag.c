@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 14:18:36 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/08 13:55:49 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/08 17:04:35 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char			*check_flag(int ac, char **av)
 	int			k;
 	char		*flag;
 
-	if (!(flag = ft_strnew(6)))
+	if (!(flag = ft_strnew(8)))
 		return (NULL);
 	i = 1;
 	k = 0;
@@ -42,7 +42,7 @@ char			*check_flag(int ac, char **av)
 		j = 1;
 		while (av[i][j])
 		{
-			if (av[i][0] == '-' && (av[i][1] && ft_strchr("Ralrt1-", av[i][1])))
+			if (av[i][0] == '-')
 				flag = do_flag(flag, av[i][j], &k);
 			j++;
 		}
