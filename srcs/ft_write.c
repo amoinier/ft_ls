@@ -6,28 +6,38 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/07 16:20:00 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/08 15:34:05 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static	void	space_nbr(int val, int max)
+static void		oldsixmonth(t_file *list, char **date, t_nbr **nbr)
 {
-	int	i;
+	char	*subcharone;
 
-	i = 0;
-	if (val == 0)
-		i++;
-	while (val != 0)
-	{
-		val = val / 10;
-		i++;
-	}
-	while (max - i > 0)
+	ft_putstr(date[1]);
+	if (time(NULL) - list->date < 0)
+		space_nbr(ft_atoi(date[2]), nbr[0]->dy_for_sp);
+	else
 	{
 		ft_putchar(' ');
-		i++;
+		ft_putchar(' ');
+	}
+	ft_putstr(date[2]);
+	ft_putchar(' ');
+	if (time(NULL) - list->date >= 0)
+	{
+		subcharone = ft_strsub(date[3], 0, ft_strlen(date[3]) - 3);
+		ft_putstr(subcharone);
+		ft_strdel(&subcharone);
+	}
+	else
+	{
+		ft_putchar(' ');
+		subcharone = ft_strsub(date[4], 0, ft_strlen(date[4]) - 1);
+		ft_putstr(subcharone);
+		ft_strdel(&subcharone);
 	}
 }
 
@@ -35,44 +45,20 @@ static	void	ft_write_date(t_file *list, t_nbr **nbr)
 {
 	char	*subcharone;
 	char	*subchartwo;
-	char 	**date;
+	char	**date;
 
 	date = ft_strsplit(ctime(&list->date), ' ');
 	if (time(NULL) - list->date < 15552000)
-	{
-
-		ft_putstr(date[1]);
-		if (time(NULL) - list->date < 0)
-			space_nbr(ft_atoi(date[2]), nbr[0]->dy_for_sp);
-		else
-		{
-			ft_putchar(' ');
-			ft_putchar(' ');
-		}
-		ft_putstr(date[2]);
-		ft_putchar(' ');
-		if (time(NULL) - list->date >= 0)
-		{
-			subcharone = ft_strsub(date[3], 0, ft_strlen(date[3]) - 3);
-			ft_putstr(subcharone);
-		}
-		else
-		{
-			ft_putchar(' ');
-			subcharone = ft_strsub(date[4], 0, ft_strlen(date[4]) - 1);
-			ft_putstr(subcharone);
-		}
-		ft_strdel(&subcharone);
-	}
+		oldsixmonth(list, date, nbr);
 	else
 	{
-		subcharone = ft_strsub(ctime(&list->date), 4, ft_strlen(ctime(&list->date)) - 18);
+		subcharone = ft_strsub(ctime(&list->date), 4,
+		ft_strlen(ctime(&list->date)) - 18);
 		subchartwo = ft_strsub(ctime(&list->date), 19, 5);
 		ft_putstr(subcharone);
 		ft_putstr(subchartwo);
-
-		ft_strdel(&subcharone);
 		ft_strdel(&subchartwo);
+		ft_strdel(&subcharone);
 	}
 	ft_freedtab2(date, 5);
 }
@@ -138,8 +124,7 @@ void			write_f(char *flag, char *path, char *start, t_file *list)
 		if (ft_strcmp(list->type, "dir") == 0)
 		{
 			ft_putstr(path);
-			ft_putchar(':');
-			ft_putchar('\n');
+			ft_putstr(":\n");
 		}
 	}
 	if (ft_strchr(flag, 'l') && list->next)

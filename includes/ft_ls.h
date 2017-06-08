@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/07 15:19:34 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/08 16:27:51 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 typedef struct		s_file
 {
-	char 			*type;
+	char			*type;
 	char			*name;
 	char			*realname;
 	char			*right;
@@ -56,26 +56,30 @@ typedef struct		s_nbr
 }					t_nbr;
 
 t_file				*ft_list_dir(char *flag, char *filename);
+void				ft_list_all_dir(char *flag, char *path, char *start);
 
+void				write_f(char *flag, char *path, char *start, t_file *list);
+
+t_file				*ft_sort_file(char *flag, t_file *start, t_file *new);
+t_file				*ft_sort(t_file *tmp, t_file *start, t_file *new);
+
+char				ft_let_type(mode_t st_mode);
 t_file				*ft_info_dir(t_file *list, char *filename);
 t_file				*ft_info_file(t_file *list, char *filename);
 
 void				ft_freedtab2(char **tab, int size);
-void 				ft_freestr(char *str);
-void 				free_list(t_file *list);
-void 				set_to_zero();
-
-
-t_file				*ft_sort_file(char *flag, t_file *start, t_file *new);
-t_nbr				**count_total();
-char				*to_lower(char *str);
-t_file				*ft_create_struct(void);
-int					nb_for_space(int val);
+void				free_list(t_file *list);
 t_file				*free_elemt_list(t_file *list);
+void				set_to_zero();
 
-void				write_f(char *flag, char *path, char *start, t_file *list);
-void				ft_list_all_dir(char *flag, char *path, char *start);
+t_nbr				**count_total();
+t_file				*ft_create_struct(void);
+
+int					nb_for_space(int val);
+void				space_nbr(int val, int max);
+char				*to_lower(char *str);
 
 char				*check_flag(int ac, char **av);
+char				**check_type(int ac, char **av, int nbr_file);
 
 #endif

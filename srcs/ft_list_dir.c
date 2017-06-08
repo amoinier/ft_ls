@@ -6,19 +6,36 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:11:11 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/07 18:06:26 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/08 15:16:36 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static	t_file			*ft_g(char *flag, struct dirent *dir, t_file *list, char *file)
+static void		change_nbr(t_nbr **nbr, t_file *tmp)
 {
-	t_file	*tmp;
-	t_nbr	**nbr;
-	char	**date;
+	char			**date;
 
-	if ((!ft_strchr(flag, 'a') && dir->d_name[0] != '.') || (ft_strchr(flag, 'a')))
+	date = ft_strsplit(ctime(&tmp->date), ' ');
+	nbr[0]->total += tmp->nb_block;
+	if (nb_for_space(tmp->nblk) >= nbr[0]->nb_for_sp)
+		nbr[0]->nb_for_sp = nb_for_space(tmp->nblk);
+	if (nb_for_space(tmp->size) >= nbr[0]->sz_for_sp)
+		nbr[0]->sz_for_sp = nb_for_space(tmp->size);
+	if ((int)ft_strlen(tmp->prop) >= nbr[0]->nm_for_sp)
+		nbr[0]->nm_for_sp = ft_strlen(tmp->prop);
+	if (nb_for_space(ft_atoi(date[2])) >= nbr[0]->dy_for_sp)
+		nbr[0]->dy_for_sp = nb_for_space(ft_atoi(date[2]));
+	ft_freedtab2(date, 5);
+}
+
+static	t_file	*ft_g(char *flag, struct dirent *dir, t_file *list, char *file)
+{
+	t_file			*tmp;
+	t_nbr			**nbr;
+
+	if ((!ft_strchr(flag, 'a') && dir->d_name[0] != '.') ||
+	(ft_strchr(flag, 'a')))
 	{
 		nbr = count_total();
 		tmp = ft_create_struct();
@@ -26,18 +43,7 @@ static	t_file			*ft_g(char *flag, struct dirent *dir, t_file *list, char *file)
 		if (ft_strchr(flag, 'l') || ft_strchr(flag, 't'))
 		{
 			tmp = ft_info_dir(tmp, file);
-
-			date = ft_strsplit(ctime(&tmp->date), ' ');
-			nbr[0]->total += tmp->nb_block;
-			if (nb_for_space(tmp->nblk) >= nbr[0]->nb_for_sp)
-				nbr[0]->nb_for_sp = nb_for_space(tmp->nblk);
-			if (nb_for_space(tmp->size) >= nbr[0]->sz_for_sp)
-				nbr[0]->sz_for_sp = nb_for_space(tmp->size);
-			if ((int)ft_strlen(tmp->prop) >= nbr[0]->nm_for_sp)
-				nbr[0]->nm_for_sp = ft_strlen(tmp->prop);
-			if (nb_for_space(ft_atoi(date[2])) >= nbr[0]->dy_for_sp)
-				nbr[0]->dy_for_sp = nb_for_space(ft_atoi(date[2]));
-			ft_freedtab2(date, 5);
+			change_nbr(nbr, tmp);
 		}
 		nbr[0]->file += 1;
 		list = ft_sort_file(flag, list, tmp);

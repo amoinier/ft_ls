@@ -6,29 +6,13 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:40:55 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/07 17:43:18 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/08 15:18:30 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static	t_file	*ft_sort(t_file *tmp, t_file *start, t_file *new)
-{
-	if (tmp && tmp->prev)
-		new->prev = tmp->prev;
-	new->next = tmp;
-	if (tmp)
-	{
-		if (tmp->prev)
-			tmp->prev->next = new;
-		tmp->prev = new;
-	}
-	while (start->prev)
-		start = start->prev;
-	return (start);
-}
-
-static	t_file	*ft_normal_sort(t_file *start, t_file *new)
+static	t_file		*ft_normal_sort(t_file *start, t_file *new)
 {
 	t_file	*tmp;
 
@@ -38,7 +22,7 @@ static	t_file	*ft_normal_sort(t_file *start, t_file *new)
 	return (ft_sort(tmp, start, new));
 }
 
-static	t_file	*ft_inverte_sort(t_file *start, t_file *new)
+static	t_file		*ft_inverte_sort(t_file *start, t_file *new)
 {
 	t_file	*tmp;
 
@@ -48,14 +32,17 @@ static	t_file	*ft_inverte_sort(t_file *start, t_file *new)
 	return (ft_sort(tmp, start, new));
 }
 
-static	t_file	*ft_normal_t_sort(t_file *start, t_file *new)
+static	t_file		*ft_normal_t_sort(t_file *start, t_file *new)
 {
 	t_file	*tmp;
 
 	tmp = start;
-	while (tmp && tmp->name && (int)(tmp->date - new->date) >= 0) {
-		if ((int)(tmp->date - new->date) == 0) {
-			if (ft_strcmp(to_lower(tmp->name), to_lower(new->name)) >= 0) {
+	while (tmp && tmp->name && (int)(tmp->date - new->date) >= 0)
+	{
+		if ((int)(tmp->date - new->date) == 0)
+		{
+			if (ft_strcmp(to_lower(tmp->name), to_lower(new->name)) >= 0)
+			{
 				break ;
 			}
 		}
@@ -64,7 +51,7 @@ static	t_file	*ft_normal_t_sort(t_file *start, t_file *new)
 	return (ft_sort(tmp, start, new));
 }
 
-static	t_file	*ft_inverte_t_sort(t_file *start, t_file *new)
+static	t_file		*ft_inverte_t_sort(t_file *start, t_file *new)
 {
 	t_file	*tmp;
 
@@ -74,7 +61,7 @@ static	t_file	*ft_inverte_t_sort(t_file *start, t_file *new)
 	return (ft_sort(tmp, start, new));
 }
 
-t_file		*ft_sort_file(char *flag, t_file *start, t_file *new)
+t_file				*ft_sort_file(char *flag, t_file *start, t_file *new)
 {
 	if (ft_strchr(flag, 'r'))
 	{
