@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 19:30:44 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/21 11:52:35 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/21 13:29:52 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ t_file			*ft_add_info(t_file *list, struct stat info, char *filename)
 	minor(info.st_rdev) : list->minor);
 	list->prop = (getpwuid(info.st_uid) && getpwuid(info.st_uid)->pw_name ?
 	ft_strdup(getpwuid(info.st_uid)->pw_name) : ft_strdup(""));
-	list->groupe = (getgrgid(info.st_gid)->gr_name ? ft_strdup(getgrgid(info.st_gid)->gr_name) : ft_strdup(""));
+	list->groupe = (getgrgid(info.st_gid)->gr_name ?
+	ft_strdup(getgrgid(info.st_gid)->gr_name) : ft_strdup(""));
 	list->size = (unsigned int)info.st_size;
 	list->date = info.st_mtime;
 	return (list);
