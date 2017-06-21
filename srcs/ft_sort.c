@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:40:55 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/08 15:18:30 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/21 11:56:04 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static	t_file		*ft_normal_t_sort(t_file *start, t_file *new)
 	{
 		if ((int)(tmp->date - new->date) == 0)
 		{
-			if (ft_strcmp(to_lower(tmp->name), to_lower(new->name)) >= 0)
+			if (ft_strcmp(tmp->name, new->name) >= 0)
 			{
 				break ;
 			}

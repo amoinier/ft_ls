@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/08 17:05:29 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/21 12:55:40 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		ft_ls(int ac, char **av, char *flag, int i)
 	nbr = count_total();
 	if (av[i + 1])
 		nbr[0]->multiav = 1;
-	av = check_type(ac, av, i);
+	av = check_type(ac, av, i, flag);
 	i = 0;
 	while (av[i] && av[i][0])
 	{

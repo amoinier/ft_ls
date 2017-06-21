@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:36:00 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/08 15:34:05 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/21 13:26:49 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void		oldsixmonth(t_file *list, char **date, t_nbr **nbr)
 		space_nbr(ft_atoi(date[2]), nbr[0]->dy_for_sp);
 	else
 	{
-		ft_putchar(' ');
 		ft_putchar(' ');
 	}
 	ft_putstr(date[2]);

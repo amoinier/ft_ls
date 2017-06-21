@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:55:45 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/08 17:01:21 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/21 12:56:15 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void				space_nbr(int val, int max);
 char				*to_lower(char *str);
 
 char				*check_flag(int ac, char **av);
-char				**check_type(int ac, char **av, int nbr_file);
+char				**check_type(int ac, char **av, int nbr_file, char *flag);
 
 #endif

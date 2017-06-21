@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:52:41 by amoinier          #+#    #+#             */
-/*   Updated: 2017/06/08 16:16:38 by amoinier         ###   ########.fr       */
+/*   Updated: 2017/06/21 11:38:28 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void		is_file(char *flag, char *path, char *start, t_file *tmp)
 	t_nbr		**nbr;
 
 	tmp = ft_create_struct();
-	tmp->name = ft_strdup(path);
+	tmp->name = (!tmp->name ? ft_strdup(path) : tmp->name);
 	tmp = ft_info_file(tmp, path);
 	nbr = count_total();
 	if (tmp->right[0] != 'd' && tmp->right[1] == 'r' && path == start)
